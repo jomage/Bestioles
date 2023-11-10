@@ -37,7 +37,7 @@ public class PersonController {
     public String getPersonById(@PathVariable("id") Integer id , Model model) {
         Optional<Person> personOpt = this.personRepository.findById(id);
         if (personOpt.isPresent()) {
-            model.addAttribute("allAnimals", this.animalRepository.findAll());
+            model.addAttribute("animalList", animalRepository.findAll());
             model.addAttribute("person", personOpt.get());
             return "person/update_person";
         }
@@ -46,14 +46,17 @@ public class PersonController {
     
     @GetMapping("/create")
     public String getPersonCreate(Model model) {
-        model.addAttribute(new Person());
+        model.addAttribute("person", new Person());
+        model.addAttribute("animalList", animalRepository.findAll());
         return "person/create_person";
     }
 
     @PostMapping
-    public String createOrUpdate(@Valid Person person, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+    public String createOrUpdate(@Valid Person person, BindingResult bindingResult, Model model) {
+        System.out.println("\n\nPERSONNE = " + person + "\n\n");
+        if (bindingResult.hasErrors()) {
             if (person.getId() != null) {
+                model.addAttribute("animalList", animalRepository.findAll());
                 return "person/update_person";
             }
             return "person/create_person";

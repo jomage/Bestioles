@@ -30,9 +30,20 @@
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
   </div>
 
+  <div class="mb-3">
+    <label class="form-label" for="animals">Animaux :</label>
+    <select multiple class="form-select" id="animals" th:field="*{animals}">
+      <option
+        th:each="anim : ${animalList}"
+        th:value="${anim.id}"
+        th:text="${anim.name + ' (' + anim.species.commonName + ')'}"
+      ></option>
+    </select>
+  </div>
+
   <div>
     <button class="btn btn-primary" type="submit">Sauvegarder</button>
-    <button class="btn btn-secondary" type="button" onclick="window.location='/species'">Retour</button>
+    <button class="btn btn-secondary" type="button" onclick="window.location='/person'">Retour</button>
   </div>
 </form>
 </body>
