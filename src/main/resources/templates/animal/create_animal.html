@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout (~{::body})}">
+<body>
+<h1>Créer un Animal</h1>
+<form th:object="${animal}" th:action="@{/animal}" method="post">
+  <input type="hidden" th:field="*{id}" />
+
+  <div>
+    <label for="name">Nom :</label>
+    <input type="text" th:field="*{name}" id="name" th:errorclass="border-danger"/>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  </div>
+
+  <div>
+    <label for="color">Couleur :</label>
+    <input type="text" th:field="*{color}" id="color" th:errorclass="border-danger"/>
+    <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span>
+  </div>
+
+  <div>
+    <label for="sex">Sexe :</label>
+    <select id="sex" th:field="*{sex}">
+      <option th:value="F">Femelle</option>
+      <option th:value="M">Mâle</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="species">Espèce :</label>
+    <select id="species" th:field="*{species}">
+      <option
+        th:each="speciesItem : ${allSpecies}"
+        th:text="${speciesItem.commonName}"
+        th:value="${speciesItem.id}"
+      ></option>
+    </select>
+  </div>
+
+  <div>
+    <button class="btn btn-primary" type="submit">Sauver</button>
+    <button class="btn btn-secondary" type="button" onclick="window.location='/animal'">Retour</button>
+  </div>
+</form>
+</body>
+</html>

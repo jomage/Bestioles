@@ -1,6 +1,8 @@
 package fr.iocean.bestioles.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,9 +13,13 @@ public class Species {
     private Integer id;
 
     @Column(length = 50)
+    @Size(max = 50)
+    @NotBlank
     private String commonName;
 
     @Column(length = 200)
+    @Size(max = 200)
+    @NotBlank
     private String latinName;
 
     @OneToMany(mappedBy = "species")

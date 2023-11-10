@@ -1,0 +1,33 @@
+body {
+	background-color:  #eee;
+}
+
+html {
+    font-family: Arial, sans-serif;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #6c9f00;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button, input[type="button"], input[type="submit"] {
+    background-color: #aece45;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #999;
+}
+
+form > div {
+    padding: 0.5rem;
+}
+
+.red {
+    color: red;
+}

@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout (~{::body})}">
+<body>
+<h1>Liste des Personnes</h1>
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Age</th>
+    <th>Animaux</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="person : ${personList}">
+    <td th:text="${person.lastname}"></td>
+    <td th:text="${person.firstname}"></td>
+    <td th:text="${person.age}"></td>
+    <td>
+      <span th:each="animal : ${person.animals}">
+        <span th:text="|${animal.name} (${animal.species.commonName})|"></span>
+      </span>
+    </td>
+    <td>
+      <a th:href="@{'/person/' + ${person.id}}">Modifier</a>
+      <a th:href="@{'/person/' + ${person.id} + '/delete'}" onclick="confirm('Etes-vous sur de vouloir supprimer cette entrée ?')">️🗑️</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <button class="btn btn-primary" type="button" onclick="window.location='/person/create'">Ajouter une Personne</button>
+  <button class="btn btn-primary" type="button" onclick="window.location='/accueil'">
+    Accueil
+  </button>
+  <a th:href="@{'/person/generate?nb=15'}" class="btn btn-primary" type="button">
+    Créer 15 personnes
+  </a>
+  <a th:href="@{'/person/delete-no-animal'}" class="btn btn-primary" type="button">
+    Supprimer personnes sans animal
+  </a>
+</div>
+</body>
+</html>

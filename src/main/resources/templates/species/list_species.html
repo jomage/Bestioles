@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout (~{::body})}">
+<body>
+<h1>Liste des espèces</h1>
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <td>ID</td>
+    <td>Nom commun</td>
+    <td>Nom latin</td>
+    <td></td>
+  </tr>
+  </thead>
+  <tr th:each="speciesItem : ${speciesList}">
+    <td th:text="${speciesItem.getId()}"></td>
+    <td th:text="${speciesItem.getCommonName()}"></td>
+    <td th:text="${speciesItem.getLatinName()}"></td>
+    <td>
+      <a th:href="@{'/species/' + ${speciesItem.id}}">Modifier</a>
+      <a th:href="@{'/species/' + ${speciesItem.id} + '/delete'}" onclick="confirm('Etes-vous sur de vouloir supprimer cette entrée ?')">️🗑️</a>
+    </td>
+  </tr>
+</table>
+<div>
+  <button class="btn btn-primary" type="button" onclick="window.location='/species/create'">Ajouter une Espèce</button>
+</div>
+</body>
+</html>

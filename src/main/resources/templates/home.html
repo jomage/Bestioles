@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout (~{::body})}">
+<body>
+<h1>Bienvenue</h1>
+<ul class="menu">
+  <li><a th:href="@{/species}">Liste des Espèces</a></li>
+  <li><a th:href="@{/animal}">Liste des Animaux</a></li>
+  <li><a th:href="@{/person}">Liste des Personnes</a></li>
+</ul>
+</body>
+</html>

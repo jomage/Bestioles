@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout :: layout (~{::body})}">
+
+<body>
+<h1>Modifier une Personne</h1>
+
+<form th:object="${person}" th:action="@{/person}" method="post">
+  <div th:if="${#fields.hasAnyErrors()}">Il y a des erreurs dans le formulaire.</div>
+  <div th:if="${#fields.hasGlobalErrors()}" class="text-danger">
+    <ul>
+      <li th:each="globalError : ${#fields.globalErrors()}" th:text="${globalError}"></li>
+    </ul>
+  </div>
+  <input type="hidden" th:field="*{id}" />
+
+  <div>
+    <label for="lastname">Nom de famille :</label>
+    <input type="text" th:field="*{lastname}" id="lastname" th:errorclass="border-danger"/>
+    <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+  </div>
+
+  <div>
+    <label for="firstname">Prénom :</label>
+    <input type="text" th:field="*{firstname}" id="firstname" th:errorclass="border-danger"/>
+    <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+  </div>
+
+  <div>
+    <label for="age">Age :</label>
+    <input type="number" th:field="*{age}" id="age" th:errorclass="border-danger"/>
+    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+  </div>
+
+  <div>
+    <button class="btn btn-primary" type="submit">Sauvegarder</button>
+    <button class="btn btn-secondary" type="button" onclick="window.location='/species'">Retour</button>
+  </div>
+</form>
+</body>
+</html>

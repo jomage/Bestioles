@@ -1,10 +1,17 @@
 package fr.iocean.bestioles.entity;
 
+import fr.iocean.bestioles.validation.FieldsMustMatch;
+import fr.iocean.bestioles.validation.TitlecaseFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
 @Entity
+//@FieldsMustMatch(field1 = "firstname", field2 = "lastname")
 public class Person {
 
     @Id
@@ -12,11 +19,19 @@ public class Person {
     private Integer id;
 
     @Column(length = 50)
+    @Size(max = 50)
+    @NotBlank
+    @TitlecaseFormat(message = "Et bien non")
     private String firstname;
 
     @Column(length = 50)
+    @Size(max = 50)
+    @NotBlank
+    @TitlecaseFormat
     private String lastname;
 
+    @Max(120)
+    @Min(0)
     private Integer age;
 
     @ManyToMany//(fetch = FetchType.EAGER)
