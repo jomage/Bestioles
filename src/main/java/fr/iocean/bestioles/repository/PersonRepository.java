@@ -2,6 +2,8 @@ package fr.iocean.bestioles.repository;
 
 import fr.iocean.bestioles.entity.Animal;
 import fr.iocean.bestioles.entity.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +21,16 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, Person
      * @param firstname le prénom de la Personne
      */
     List<Person> findByLastnameOrFirstname(String lastname, String firstname);
+
+    /**
+     * Retourne dans une page les personnes ayant pour nom le premier paramètre fourni ou
+     * ayant pour prénom le second paramètre fourni.
+     *
+     * @param lastname  le nom de la Personne
+     * @param firstname le prénom de la Personne
+     * @param pageable les informations de la page demandée
+     */
+    Page<Person> findByLastnameOrFirstname(String lastname, String firstname, Pageable pageable);
 
     /**
      * Retourne toutes les personnes d’un âge supérieur ou égal au paramètre fourni

@@ -1,6 +1,10 @@
 package fr.iocean.bestioles.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -12,11 +16,17 @@ public class Person {
     private Integer id;
 
     @Column(length = 50)
+    @NotBlank
+    @Size(max = 50)
     private String firstname;
 
     @Column(length = 50)
+    @NotBlank
+    @Size(max = 50)
     private String lastname;
 
+    @Min(0)
+    @Max(120)
     private Integer age;
 
     @ManyToMany//(fetch = FetchType.EAGER)

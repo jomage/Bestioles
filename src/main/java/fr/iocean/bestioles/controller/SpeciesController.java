@@ -1,0 +1,53 @@
+package fr.iocean.bestioles.controller;
+
+import fr.iocean.bestioles.entity.Species;
+import fr.iocean.bestioles.service.SpeciesService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/species")
+public class SpeciesController {
+
+    @Autowired
+    private SpeciesService speciesService;
+
+    @GetMapping("{id}")
+    public Species findById(@PathVariable Integer id) {
+        return speciesService.findById(id);
+    }
+
+    @GetMapping
+    public List<Species> findAll() {
+        return speciesService.findAll();
+    }
+
+    @GetMapping("page")
+    public Page<Species> findAllPage(
+            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
+            @RequestParam(value = "size", defaultValue = "25") int size
+    ) {
+        return speciesService.findAll(PageRequest.of(pageNumber, size));
+    }
+
+    @PostMapping
+    public Species create(@RequestBody @Valid Species speciesToUpdate) {
+        return speciesService.create(speciesToUpdate);
+    }
+
+    @PutMapping("{id}")
+    public Species update(@PathVariable Integer id, @RequestBody @Valid Species speciesToUpdate) {
+        return speciesService.update(speciesToUpdate);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Integer id) {
+        speciesService.deleteById(id);
+    }
+
+}

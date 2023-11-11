@@ -1,7 +1,11 @@
 package fr.iocean.bestioles.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.iocean.bestioles.enums.Sex;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -12,18 +16,25 @@ public class Animal {
     private Integer id;
 
     @Column(length = 50)
+    @NotBlank
+    @Size(max = 50)
     private String name;
 
     @Column(length = 50)
+    @NotBlank
+    @Size(max = 50)
     private String color;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Sex sex;
 
     @ManyToOne
+    @NotNull
     private Species species;
 
     @ManyToMany(mappedBy = "animals")
+    @JsonIgnore
     Set<Person> persons;
 
     // Getters / setters
