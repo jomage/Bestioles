@@ -1,4 +1,4 @@
-package fr.iocean.bestioles.service;
+package fr.iocean.bestioles.cron;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;

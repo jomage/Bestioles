@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,10 +65,13 @@ public class PersonController {
     @GetMapping("page")
     public Page<Person> findAll(
             @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "size", defaultValue = "25") int size
+            @RequestParam(value = "size", defaultValue = "25") int size,
+            @RequestParam(value = "sortProperties") List<String> sortProperties,
+            @RequestParam(value = "sortDirection") Sort.Direction sortDirection
     ) {
+        System.out.println(sortProperties);
         return personService.findAll(
-                PageRequest.of(pageNumber, size)
+                PageRequest.of(pageNumber, size, Sort.by(sortDirection, String.valueOf(sortProperties)))
         );
     }
 
