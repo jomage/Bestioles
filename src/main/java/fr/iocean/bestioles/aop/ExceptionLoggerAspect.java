@@ -15,6 +15,10 @@ public class ExceptionLoggerAspect {
 
     @AfterThrowing(
         value = "execution(* fr.iocean.bestioles.repository.*.save(..))",
+        // Les repos sont difficiles à cibler, les pointcuts suivant ne marchent pas (?)
+//        value = "@within(org.springframework.stereotype.Repository)",
+//        value = "this(org.springframework.stereotype.Repository)",
+//        value = "within(fr.iocean.bestioles.repository..*)",
         throwing = "ex"
     )
     public void logException(JoinPoint joinPoint, Exception ex) {

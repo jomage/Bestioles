@@ -22,9 +22,9 @@ public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler({
             EntityNotFoundException.class,
-            jakarta.persistence.EntityNotFoundException.class
+            fr.iocean.bestioles.exception.EntityNotFoundException.class
     })
-    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDto handleExceptionNotFound(Exception exception, WebRequest request) {
         exception.printStackTrace();
         return new ErrorDto(
@@ -65,6 +65,7 @@ public class ExceptionHandlerControllerAdvice {
         );
     }
 
+    /* Commentée car prends le pas sur certaines autres (EntityNotFoundException perso)
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto handleException500(Exception exception, WebRequest request) {
@@ -72,10 +73,11 @@ public class ExceptionHandlerControllerAdvice {
         return new ErrorDto(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 LocalDateTime.now(),
-                exception.getMessage(),
+                "ZUUUUUUUUUUT !",
                 request.getDescription(false)
         );
     }
+    */
 
     private String getMessagesFromBindingResult(BindingResult bindingResult) {
         StringBuilder sb = new StringBuilder();

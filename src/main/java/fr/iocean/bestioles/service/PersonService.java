@@ -3,10 +3,10 @@ package fr.iocean.bestioles.service;
 import fr.iocean.bestioles.dto.PersonDto;
 import fr.iocean.bestioles.dto.PersonMapper;
 import fr.iocean.bestioles.entity.Person;
+import fr.iocean.bestioles.exception.EntityNotFoundException;
 import fr.iocean.bestioles.exception.EntityToCreateHasAnIdException;
 import fr.iocean.bestioles.exception.EntityToUpdateHasNoIdException;
 import fr.iocean.bestioles.repository.PersonRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +54,7 @@ public class PersonService {
     }
 
     public PersonDto create(@Valid Person updatedPerson) {
-        if (updatedPerson == null || updatedPerson.getId() != null) {
+        if (updatedPerson != null && updatedPerson.getId() != null) {
             throw new EntityToCreateHasAnIdException();
         }
         return personMapper.toDto(personRepository.save(updatedPerson));

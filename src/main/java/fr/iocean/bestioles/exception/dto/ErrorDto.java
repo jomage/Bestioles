@@ -11,6 +11,8 @@ public class ErrorDto {
     private final String message;
     private final String description;
 
+    private final String test = "coucou";
+
     public ErrorDto(
             int statusCode,
             LocalDateTime localDateTime,
@@ -37,5 +39,9 @@ public class ErrorDto {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTest() {
+        return test;
     }
 }
