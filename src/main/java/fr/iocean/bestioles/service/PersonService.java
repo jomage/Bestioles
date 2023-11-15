@@ -37,8 +37,9 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
-    public Page<Person> findAll(Pageable pageable) {
-        return personRepository.findAll(pageable);
+    public Page<PersonDto> findAll(Pageable pageable) {
+        return personRepository.findAll(pageable)
+                .map((person) -> personMapper.toDto(person));
     }
 
     public Page<Person> findByLastnameOrFirstname(String lastname, String firstname, Pageable pageable) {

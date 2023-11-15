@@ -16,13 +16,12 @@ public class InvalidEntityErrorDto extends ErrorDto {
 
     public InvalidEntityErrorDto(
             int statusCode,
-            LocalDateTime localDateTime,
             String message,
             String description,
             List<ObjectError> globalErrors,
             List<FieldError> fieldErrors
     ) {
-        super(statusCode, localDateTime, message, description);
+        super(statusCode, message, description);
         this.globalErrors = globalErrors;
         this.fieldErrors = fieldErrors;
     }

@@ -6,7 +6,7 @@ public class PersonDto {
     private Integer id;
     private Integer age;
     private String name;
-    private List<AnimalDto> animals;
+    private List<String> animals;
 
     public Integer getId() {
         return id;
@@ -32,11 +32,11 @@ public class PersonDto {
         this.name = name;
     }
 
-    public List<AnimalDto> getAnimals() {
+    public List<String> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(List<AnimalDto> animals) {
+    public void setAnimals(List<String> animals) {
         this.animals = animals;
     }
 }

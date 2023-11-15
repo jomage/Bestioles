@@ -29,7 +29,6 @@ public class ExceptionHandlerControllerAdvice {
         exception.printStackTrace();
         return new ErrorDto(
                 HttpStatus.NOT_FOUND.value(),
-                LocalDateTime.now(),
                 "L'entité n'a pas été trouvée",
                 request.getDescription(false)
         );
@@ -45,19 +44,18 @@ public class ExceptionHandlerControllerAdvice {
         exception.printStackTrace();
         return new ErrorDto(
                 HttpStatus.BAD_REQUEST.value(),
-                LocalDateTime.now(),
                 exception.getMessage(),
                 request.getDescription(false)
         );
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public InvalidEntityErrorDto handleExceptionArgumentNotValid(MethodArgumentNotValidException exception, WebRequest request) {
+    public InvalidEntityErrorDto handleExceptionArgumentNotValid(
+            MethodArgumentNotValidException exception, WebRequest request) {
         exception.printStackTrace();
         return new InvalidEntityErrorDto(
                 HttpStatus.BAD_REQUEST.value(),
-                LocalDateTime.now(),
                 getMessagesFromBindingResult(exception.getBindingResult()),
                 request.getDescription(false),
                 exception.getBindingResult().getGlobalErrors(),

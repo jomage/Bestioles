@@ -45,6 +45,9 @@ public class AnimalService {
         if (animalToUpdate.getId() == null) {
             throw new EntityToUpdateHasNoIdException();
         }
+        if (!animalRepository.existsById(animalToUpdate.getId())) {
+            throw new EntityNotFoundException();
+        }
 
         return animalRepository.save(animalToUpdate);
     }

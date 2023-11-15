@@ -14,7 +14,7 @@ public class CronService {
 
     @Scheduled(cron = "${cron.value}")
     public void testCron() {
-        System.out.println(">>> CRON " + value + " ( " + LocalDateTime.now() + " <<<");
+        System.out.println(">>> CRON " + value + " (" + LocalDateTime.now() + ") <<<");
     }
 
 }

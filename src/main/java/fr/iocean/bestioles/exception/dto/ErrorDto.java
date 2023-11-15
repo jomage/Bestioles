@@ -11,16 +11,13 @@ public class ErrorDto {
     private final String message;
     private final String description;
 
-    private final String test = "coucou";
-
     public ErrorDto(
             int statusCode,
-            LocalDateTime localDateTime,
             String message,
             String description
     ) {
         this.statusCode = statusCode;
-        this.localDateTime = localDateTime;
+        this.localDateTime = LocalDateTime.now();
         this.message = message;
         this.description = description;
     }
@@ -41,7 +38,6 @@ public class ErrorDto {
         return description;
     }
 
-    public String getTest() {
-        return test;
-    }
+
+
 }

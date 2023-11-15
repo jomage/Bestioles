@@ -7,6 +7,8 @@ public class AnimalDto {
     private String name;
     private String color;
     private Sex sex;
+    private String species;
+    private String persons;
 
     public Integer getId() {
         return id;
@@ -38,5 +40,21 @@ public class AnimalDto {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getPersons() {
+        return persons;
+    }
+
+    public void setPersons(String persons) {
+        this.persons = persons;
     }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/person")
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
 public class PersonController {
 
     @Autowired
@@ -64,15 +65,12 @@ public class PersonController {
     }
 
     @GetMapping("page")
-    public Page<Person> findAll(
+    public Page<PersonDto> findAll(
             @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "size", defaultValue = "25") int size,
-            @RequestParam(value = "sortProperties") List<String> sortProperties,
-            @RequestParam(value = "sortDirection") Sort.Direction sortDirection
+            @RequestParam(value = "size", defaultValue = "25") int size
     ) {
-        System.out.println(sortProperties);
         return personService.findAll(
-                PageRequest.of(pageNumber, size, Sort.by(sortDirection, String.valueOf(sortProperties)))
+                PageRequest.of(pageNumber, size)
         );
     }
 

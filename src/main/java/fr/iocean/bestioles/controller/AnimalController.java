@@ -31,9 +31,11 @@ public class AnimalController {
     @GetMapping("page")
     public Page<AnimalDto> findAllPage(
             @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "size", defaultValue = "25") int size
+            @RequestParam(value = "pageSize", defaultValue = "25") int size
     ) {
-        return animalService.findAll(PageRequest.of(pageNumber, size));
+        return animalService.findAll(
+                PageRequest.of(pageNumber, size)
+        );
     }
 
     @PostMapping
