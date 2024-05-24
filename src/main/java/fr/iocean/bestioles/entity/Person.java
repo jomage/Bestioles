@@ -1,5 +1,6 @@
 package fr.iocean.bestioles.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -29,12 +30,13 @@ public class Person {
     @Max(120)
     private Integer age;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})//(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})//(fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_animals",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "animals_id")
     )
+    @JsonIgnoreProperties("persons")
     Set<Animal> animals;
 
     // Utility

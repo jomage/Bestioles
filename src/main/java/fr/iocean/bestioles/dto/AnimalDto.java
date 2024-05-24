@@ -1,14 +1,20 @@
 package fr.iocean.bestioles.dto;
 
+import fr.iocean.bestioles.entity.Species;
 import fr.iocean.bestioles.enums.Sex;
 
+import java.util.List;
+
+/**
+ * DTO utilisé pour la recherche d'animaux.
+ */
 public class AnimalDto {
     private Integer id;
     private String name;
     private String color;
     private Sex sex;
-    private String species;
-    private String persons;
+    private Species species;
+    private List<PersonSimpleDto> persons;
 
     public Integer getId() {
         return id;
@@ -42,19 +48,19 @@ public class AnimalDto {
         this.sex = sex;
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
-    public String getPersons() {
+    public List<PersonSimpleDto> getPersons() {
         return persons;
     }
 
-    public void setPersons(String persons) {
+    public void setPersons(List<PersonSimpleDto> persons) {
         this.persons = persons;
     }
 }

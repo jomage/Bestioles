@@ -7,8 +7,6 @@ import fr.iocean.bestioles.repository.SpeciesRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +22,12 @@ public class SpeciesService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<Species> findAll() {
+    public List<Species> findAll(String fragment) {
+        if (fragment != null && !fragment.isEmpty()) {
+            return speciesRepository.findAllByLatinNameContainingIgnoreCaseOrCommonNameContainingIgnoreCase(
+                    fragment, fragment);
+        }
         return speciesRepository.findAll();
-    }
-
-    public Page<Species> findAll(Pageable pageable) {
-        return speciesRepository.findAll(pageable);
     }
 
     public Species update(@Valid Species speciesToUpdate) {

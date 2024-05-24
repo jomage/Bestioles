@@ -5,8 +5,9 @@ import java.util.List;
 public class PersonDto {
     private Integer id;
     private Integer age;
-    private String name;
-    private List<String> animals;
+    private String firstName;
+    private String lastName;
+    private List<AnimalSimpleDto> animals;
 
     public Integer getId() {
         return id;
@@ -24,19 +25,27 @@ public class PersonDto {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public List<String> getAnimals() {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<AnimalSimpleDto> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(List<String> animals) {
+    public void setAnimals(List<AnimalSimpleDto> animals) {
         this.animals = animals;
     }
 }

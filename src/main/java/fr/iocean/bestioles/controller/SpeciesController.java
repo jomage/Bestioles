@@ -4,8 +4,6 @@ import fr.iocean.bestioles.entity.Species;
 import fr.iocean.bestioles.service.SpeciesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +21,8 @@ public class SpeciesController {
     }
 
     @GetMapping
-    public List<Species> findAll() {
-        return speciesService.findAll();
-    }
-
-    @GetMapping("page")
-    public Page<Species> findAllPage(
-            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "size", defaultValue = "25") int size
-    ) {
-        return speciesService.findAll(PageRequest.of(pageNumber, size));
+    public List<Species> findAll(@RequestParam(value = "contains", required = false) String fragment) {
+        return speciesService.findAll(fragment);
     }
 
     @PostMapping

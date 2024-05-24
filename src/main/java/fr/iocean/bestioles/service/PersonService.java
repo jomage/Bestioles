@@ -30,35 +30,34 @@ public class PersonService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<PersonDto> findAll() {
-        return personRepository.findAll()
+    public List<PersonDto> findAll(String fragment) {
+        List<Person> listToReturn;
+        if (fragment != null && !fragment.isEmpty()) {
+            listToReturn = personRepository.findByLastnameContainingIgnoreCaseOrFirstnameContainingIgnoreCase(
+                    fragment, fragment);
+        } else {
+            listToReturn = personRepository.findAll();
+        }
+
+        return listToReturn
                 .stream()
                 .map((person) -> personMapper.toDto(person))
                 .collect(Collectors.toList());
     }
 
-    public Page<PersonDto> findAll(Pageable pageable) {
-        return personRepository.findAll(pageable)
-                .map((person) -> personMapper.toDto(person));
-    }
-
-    public Page<Person> findByLastnameOrFirstname(String lastname, String firstname, Pageable pageable) {
-        return personRepository.findByLastnameOrFirstname(lastname, firstname, pageable);
-    }
-
-    public PersonDto update(@Valid Person updatedPerson) {
+    public Person update(@Valid Person updatedPerson) {
         if (updatedPerson.getId() == null) {
             throw new EntityToUpdateHasNoIdException();
         }
 
-        return personMapper.toDto(personRepository.save(updatedPerson));
+        return personRepository.save(updatedPerson);
     }
 
-    public PersonDto create(@Valid Person updatedPerson) {
+    public Person create(@Valid Person updatedPerson) {
         if (updatedPerson != null && updatedPerson.getId() != null) {
             throw new EntityToCreateHasAnIdException();
         }
-        return personMapper.toDto(personRepository.save(updatedPerson));
+        return personRepository.save(updatedPerson);
     }
 
     public void deleteById(Integer id) {

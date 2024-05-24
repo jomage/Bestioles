@@ -5,20 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class PersonMapper {
+    @Autowired
+    AnimalSimpleMapper animalSimpleMapper;
 
     public PersonDto toDto(Person person) {
         PersonDto dto = new PersonDto();
         dto.setId(person.getId());
         dto.setAge(person.getAge());
-        dto.setName(person.getLastname().toUpperCase() + " " + person.getFirstname());
+        dto.setFirstName(person.getFirstname());
+        dto.setLastName(person.getLastname());
         if (person.getAnimals() != null) {
-            List<String> animalList = person.getAnimals()
+            List<AnimalSimpleDto> animalList = person.getAnimals()
                     .stream()
-                    .map((animal) -> animal.getName() + " (" + animal.getSpecies().getCommonName() + ")")
+                    .map(animalSimpleMapper::toSimpleDto)
                     .toList();
 
             dto.setAnimals(animalList);

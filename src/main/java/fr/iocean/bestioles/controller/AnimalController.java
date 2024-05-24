@@ -5,8 +5,6 @@ import fr.iocean.bestioles.entity.Animal;
 import fr.iocean.bestioles.service.AnimalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,18 +22,8 @@ public class AnimalController {
     }
 
     @GetMapping
-    public List<AnimalDto> findAll() {
-        return animalService.findAll();
-    }
-
-    @GetMapping("page")
-    public Page<AnimalDto> findAllPage(
-            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "pageSize", defaultValue = "25") int size
-    ) {
-        return animalService.findAll(
-                PageRequest.of(pageNumber, size)
-        );
+    public List<AnimalDto> findAll(@RequestParam(value = "contains", required = false) String fragment) {
+        return animalService.findAll(fragment);
     }
 
     @PostMapping

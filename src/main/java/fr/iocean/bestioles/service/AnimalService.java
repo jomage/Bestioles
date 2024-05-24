@@ -9,8 +9,6 @@ import fr.iocean.bestioles.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,16 +27,18 @@ public class AnimalService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<AnimalDto> findAll() {
-        return animalRepository.findAll()
-                .stream()
-                .map((animal) -> animalMapper.toDto(animal))
-                .toList();
-    }
+    public List<AnimalDto> findAll(String fragment) {
+        List<Animal> listToReturn;
+        if (fragment != null && !fragment.isEmpty()) {
+            listToReturn = animalRepository.findAllByNameContainingIgnoreCase(fragment);
+        } else {
+            listToReturn = animalRepository.findAll();
+        }
 
-    public Page<AnimalDto> findAll(Pageable pageable) {
-        return animalRepository.findAll(pageable)
-                .map((animal) -> animalMapper.toDto(animal));
+        return listToReturn
+                .stream()
+                .map(animalMapper::toDto)
+                .toList();
     }
 
     public Animal update(@Valid Animal animalToUpdate) {

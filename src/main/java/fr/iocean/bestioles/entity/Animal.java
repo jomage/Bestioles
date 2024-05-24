@@ -1,6 +1,7 @@
 package fr.iocean.bestioles.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.iocean.bestioles.enums.Sex;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -34,7 +35,7 @@ public class Animal {
     private Species species;
 
     @ManyToMany(mappedBy = "animals")
-    @JsonIgnore
+    @JsonIgnoreProperties("animals")
     Set<Person> persons;
 
     // Getters / setters

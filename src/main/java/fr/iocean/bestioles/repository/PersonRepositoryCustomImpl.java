@@ -76,21 +76,6 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
         return personList;
     }
 
-    @Override
-    public void generateRandomPersons(int numberToCreate) {
-        Random rand = new Random();
-        List<String> noms = Arrays.asList("Perez", "Dupont", "Guérin", "Dufour", "Duflot", "Schmitt", "Chevalier", "Petit", "Wagner", "Barbier", "Marie", "Caron", "Mandarin", "Philippe", "Mage");
-        List<String> prenoms = Arrays.asList("Océane", "Romain", "Clara", "Justine", "Yanis", "Alice", "Véronique", "Adrien", "Amin", "Aurélie", "Julie", "Alexandre", "Lucas", "Thomas", "Jordi");
-
-        for (int i = 0; i < numberToCreate ; i++) {
-            Person p = new Person();
-            p.setAge(rand.nextInt(120));
-            p.setFirstname(prenoms.get(rand.nextInt(prenoms.size())));
-            p.setLastname(noms.get(rand.nextInt(noms.size())));
-            em.persist(p);
-        }
-    }
-
     /**
      * Méthode d'exemple avec paramètres qui peuvent être null ("optionels)
      *

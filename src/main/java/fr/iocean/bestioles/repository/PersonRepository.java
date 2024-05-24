@@ -2,8 +2,6 @@ package fr.iocean.bestioles.repository;
 
 import fr.iocean.bestioles.entity.Animal;
 import fr.iocean.bestioles.entity.Person;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +11,8 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer>, PersonRepositoryCustom {
+    List<Person> findByLastnameContainingIgnoreCaseOrFirstnameContainingIgnoreCase(
+            String lastNameFragment, String firstNameFragment);
     /**
      * Retourne les personnes ayant pour nom le premier paramètre fourni ou
      * ayant pour prénom le second paramètre fourni
@@ -23,32 +23,11 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, Person
     List<Person> findByLastnameOrFirstname(String lastname, String firstname);
 
     /**
-     * Retourne dans une page les personnes ayant pour nom le premier paramètre fourni ou
-     * ayant pour prénom le second paramètre fourni.
-     *
-     * @param lastname  le nom de la Personne
-     * @param firstname le prénom de la Personne
-     * @param pageable les informations de la page demandée
-     */
-    Page<Person> findByLastnameOrFirstname(String lastname, String firstname, Pageable pageable);
-
-    /**
      * Retourne toutes les personnes d’un âge supérieur ou égal au paramètre fourni
      *
      * @param ageMinimal l'age minimal des personnes renvoyées
      */
     List<Person> findByAgeGreaterThanEqual(Integer ageMinimal);
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Retourne la liste des Personnes dont l’âge est entre « age min » et « age max ».
@@ -70,20 +49,4 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, Person
 
     List<Person> findOwnersOfAnimal(@Param("animal") Animal animal);
 
-    /**
-     * Chercher toutes les Personnes qui possèdent l’animal donné en paramètre
-     * SOLUTION 2 avc opérateur 'member of'
-     *
-     * @param animal l'animal que doivent 'posséder' les personnes retournées
-     */
-    @Query("select p from Person p where :animal member of p.animals")
-    List<Person> findOwnersOfAnimal2(@Param("animal") Animal animal);
-
-    /**
-     * Chercher toutes les Personnes qui possèdent l’animal donné en paramètre
-     * Si on veut faire avec le nom de la méthode
-     * @param animal l'animal que doivent 'posséder' les personnes retournées
-     */
-    List<Person> findByAnimals(Animal animal);
-    List<Person> findByAnimals_Id(Integer id);
 }

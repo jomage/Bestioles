@@ -3,14 +3,10 @@ package fr.iocean.bestioles.controller;
 import fr.iocean.bestioles.dto.PersonDto;
 import fr.iocean.bestioles.entity.Person;
 import fr.iocean.bestioles.service.PersonService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,28 +19,9 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping("plante")
-    public PersonDto getToto() {
-        return personService.create(null);
-    }
-
-    @GetMapping("{id}") // localhost:8080/rest/person/{id}
+    @GetMapping("{id}")
     public Person findById(@PathVariable Integer id) {
         return personService.findById(id);
-    }
-
-    /**
-     * Exemple avec une gestion du ResponseEntity "à la main"
-     */
-    @GetMapping("{id}/") // localhost:8080/rest/person/{id}/
-    public ResponseEntity<?> findById2(@PathVariable Integer id) {
-        Person person;
-        try {
-            person = personService.findById(id);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body("Pas d'entité avec cette ID");
-        }
-        return ResponseEntity.ok(person);
     }
 
     /**
@@ -60,28 +37,18 @@ public class PersonController {
     }
 
     @GetMapping
-    public List<PersonDto> findAll() {
-        return personService.findAll();
-    }
-
-    @GetMapping("page")
-    public Page<PersonDto> findAll(
-            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(value = "size", defaultValue = "25") int size
-    ) {
-        return personService.findAll(
-                PageRequest.of(pageNumber, size)
-        );
+    public List<PersonDto> findAll(@RequestParam(value = "contains", required = false) String fragment) {
+        return personService.findAll(fragment);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PersonDto createPerson(@RequestBody @Valid Person personToCreate) {
+    public Person createPerson(@RequestBody @Valid Person personToCreate) {
         return personService.create(personToCreate);
     }
 
-    @PutMapping("{id}") // pUt = Update
-    public PersonDto updatePerson(@PathVariable Integer id, @RequestBody @Valid Person personToUpdate) {
+    @PutMapping("{id}")
+    public Person updatePerson(@PathVariable Integer id, @RequestBody @Valid Person personToUpdate) {
         return personService.update(personToUpdate);
     }
 
