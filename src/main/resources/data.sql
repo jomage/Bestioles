@@ -54,3 +54,24 @@ INSERT INTO person_animals (person_id, animals_id) VALUES(7, 8);
 INSERT INTO person_animals (person_id, animals_id) VALUES(8, 9);
 INSERT INTO person_animals (person_id, animals_id) VALUES(9, 10);
 INSERT INTO person_animals (person_id, animals_id) VALUES(11, 11);
+
+-- INSERT Roles
+INSERT INTO authority VALUES ('ROLE_ADMIN');
+INSERT INTO authority VALUES ('ROLE_USER');
+
+-- INSERT Users
+-- login=admin mdp=admin
+INSERT INTO user_(login, password_hash)
+VALUES ('admin', '$2a$10$sBACfFJc3jK6JIYy9sYVYeVVQo0wHn0l.PUpdfAL36A9GNl1mD1Aq');
+-- Ajout roles sur admin
+INSERT INTO user_authority
+VALUES (1, 'ROLE_ADMIN');
+INSERT INTO user_authority
+VALUES (1, 'ROLE_USER');
+
+-- login=user mdp=user
+INSERT INTO user_(login, password_hash)
+VALUES ('user', '$2a$10$kugIaMlSF1PEWI22OVSF9etnsGpGS83NoLwVjkPz5VzFCmjD5l66u');
+-- Ajout role sur user
+INSERT INTO user_authority
+VALUES (2, 'ROLE_USER');
