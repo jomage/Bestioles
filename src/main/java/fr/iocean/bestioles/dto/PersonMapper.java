@@ -15,8 +15,8 @@ public class PersonMapper {
         PersonDto dto = new PersonDto();
         dto.setId(person.getId());
         dto.setAge(person.getAge());
-        dto.setFirstName(person.getFirstname());
-        dto.setLastName(person.getLastname());
+        dto.setFirstName(person.getFirstName());
+        dto.setLastName(person.getLastName());
         if (person.getAnimals() != null) {
             List<AnimalSimpleDto> animalList = person.getAnimals()
                     .stream()

@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.is;
 import fr.iocean.bestioles.entity.Person;
 import fr.iocean.bestioles.repository.PersonRepository;
 import fr.iocean.bestioles.utils.JsonUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -62,8 +61,8 @@ public class PersonControllerIntegrationTest {
 
         Person personToCreate = new Person();
         personToCreate.setAge(1);
-        personToCreate.setFirstname("Created");
-        personToCreate.setLastname("Person");
+        personToCreate.setFirstName("Created");
+        personToCreate.setLastName("Person");
         mockMvc.perform(
                         post(ENTITY_API_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -80,8 +79,8 @@ public class PersonControllerIntegrationTest {
          // Invalid Firstname
         Person personToCreate = new Person();
         personToCreate.setAge(1);
-        personToCreate.setFirstname("");
-        personToCreate.setLastname("Person");
+        personToCreate.setFirstName("");
+        personToCreate.setLastName("Person");
         mockMvc.perform(
                         post(ENTITY_API_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -90,8 +89,8 @@ public class PersonControllerIntegrationTest {
                 .andExpect(status().isBadRequest());
 
         // Invalid Lastname
-        personToCreate.setFirstname("Created");
-        personToCreate.setLastname("");
+        personToCreate.setFirstName("Created");
+        personToCreate.setLastName("");
         mockMvc.perform(
                         post(ENTITY_API_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +100,7 @@ public class PersonControllerIntegrationTest {
 
         // Invalid Age
         personToCreate.setAge(314);
-        personToCreate.setLastname("Person");
+        personToCreate.setLastName("Person");
         mockMvc.perform(
                         post(ENTITY_API_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -117,8 +116,8 @@ public class PersonControllerIntegrationTest {
         Person personToCreate = new Person();
         personToCreate.setId(2);
         personToCreate.setAge(1);
-        personToCreate.setFirstname("Created");
-        personToCreate.setLastname("Person");
+        personToCreate.setFirstName("Created");
+        personToCreate.setLastName("Person");
         mockMvc.perform(
                         post(ENTITY_API_URL)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -135,8 +134,8 @@ public class PersonControllerIntegrationTest {
         // Invalid Firstname
         Person personToUpdate = personRepository.findById(800).orElseThrow();
         personToUpdate.setAge(1);
-        personToUpdate.setFirstname("");
-        personToUpdate.setLastname("Person");
+        personToUpdate.setFirstName("");
+        personToUpdate.setLastName("Person");
         mockMvc.perform(
                         put(ENTITY_API_URL_ID, 800)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -145,8 +144,8 @@ public class PersonControllerIntegrationTest {
                 .andExpect(status().isBadRequest());
 
         // Invalid Lastname
-        personToUpdate.setFirstname("Created");
-        personToUpdate.setLastname("");
+        personToUpdate.setFirstName("Created");
+        personToUpdate.setLastName("");
         mockMvc.perform(
                         put(ENTITY_API_URL_ID, 800)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -156,7 +155,7 @@ public class PersonControllerIntegrationTest {
 
         // Invalid Age
         personToUpdate.setAge(314);
-        personToUpdate.setLastname("Person");
+        personToUpdate.setLastName("Person");
         mockMvc.perform(
                         put(ENTITY_API_URL_ID, 800)
                                 .contentType(MediaType.APPLICATION_JSON)

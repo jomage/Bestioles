@@ -41,8 +41,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN")
 
-                // /auth est accessible à tout le monde.
+                // /auth est accessible à tout le monde
                 .requestMatchers("/auth/**").permitAll()
+
+                // api-docs est accessible à tout le monde
+                .requestMatchers("api-docs/**").permitAll()
             )
             // on applique le filtre qui check le JWT
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))

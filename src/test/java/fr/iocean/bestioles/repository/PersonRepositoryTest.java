@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,24 +30,24 @@ public class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @BeforeEach
-    private void initData() {
+    public void initData() {
         System.out.println("Before Each");
 
         em.clear();
         Person p2 = new Person();
-        p2.setFirstname("James");
-        p2.setLastname("Tour");
+        p2.setFirstName("James");
+        p2.setLastName("Tour");
         p2.setAge(56);
         em.persist(p2);
         Person p3 = new Person();
-        p3.setFirstname("Toto");
-        p3.setLastname("Toto");
+        p3.setFirstName("Toto");
+        p3.setLastName("Toto");
         p3.setAge(12);
         em.persist(p3);
 
         Person p4 = new Person();
-        p4.setFirstname("Toto");
-        p4.setLastname("Tour");
+        p4.setFirstName("Toto");
+        p4.setLastName("Tour");
         p4.setAge(77);
         em.persist(p4);
 
@@ -56,14 +55,14 @@ public class PersonRepositoryTest {
     }
 
     @Test
-    public void findByLastnameOrFirstnameTest() {
-        List<Person> list = this.personRepository.findByLastnameOrFirstname("Tour", "Toto");
+    public void findByLastNameOrFirstNameTest() {
+        List<Person> list = this.personRepository.findByLastNameOrFirstName("Tour", "Toto");
         Assertions.assertEquals(3, list.size());
 
-        list = this.personRepository.findByLastnameOrFirstname("Toto", null);
+        list = this.personRepository.findByLastNameOrFirstName("Toto", null);
         Assertions.assertEquals(1, list.size());
 
-        list = this.personRepository.findByLastnameOrFirstname(null, null);
+        list = this.personRepository.findByLastNameOrFirstName(null, null);
         Assertions.assertEquals(0, list.size());
     }
 
@@ -100,16 +99,16 @@ public class PersonRepositoryTest {
         listAnimal.add(a);
 
         Person p5 = new Person();
-        p5.setFirstname("Jacques");
-        p5.setLastname("Adi");
+        p5.setFirstName("Jacques");
+        p5.setLastName("Adi");
         p5.setAge(77);
         p5.setAnimals(listAnimal);
         em.persist(p5);
 
         List<Person> test = this.personRepository.findOwnersOfAnimal(a);
         Assertions.assertEquals(1, test.size());
-        Assertions.assertEquals(test.get(0).getFirstname(), "Jacques");
-        Assertions.assertEquals(test.get(0).getLastname(), "Adi");
+        Assertions.assertEquals(test.get(0).getFirstName(), "Jacques");
+        Assertions.assertEquals(test.get(0).getLastName(), "Adi");
     }
 
     @Test

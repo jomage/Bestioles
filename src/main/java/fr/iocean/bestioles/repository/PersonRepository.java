@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer>, PersonRepositoryCustom {
-    List<Person> findByLastnameContainingIgnoreCaseOrFirstnameContainingIgnoreCase(
+    List<Person> findByLastNameContainingIgnoreCaseOrFirstNameContainingIgnoreCase(
             String lastNameFragment, String firstNameFragment);
     /**
      * Retourne les personnes ayant pour nom le premier paramètre fourni ou
@@ -20,7 +20,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, Person
      * @param lastname  le nom de la Personne
      * @param firstname le prénom de la Personne
      */
-    List<Person> findByLastnameOrFirstname(String lastname, String firstname);
+    List<Person> findByLastNameOrFirstName(String lastname, String firstname);
 
     /**
      * Retourne toutes les personnes d’un âge supérieur ou égal au paramètre fourni

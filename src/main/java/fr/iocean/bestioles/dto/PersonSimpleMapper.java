@@ -8,8 +8,8 @@ public class PersonSimpleMapper {
     public PersonSimpleDto toSimpleDto(Person person) {
         PersonSimpleDto dto = new PersonSimpleDto();
         dto.setId(person.getId());
-        dto.setFirstName(person.getFirstname());
-        dto.setLastName(person.getLastname());
+        dto.setFirstName(person.getFirstName());
+        dto.setLastName(person.getLastName());
         return dto;
     }
 }

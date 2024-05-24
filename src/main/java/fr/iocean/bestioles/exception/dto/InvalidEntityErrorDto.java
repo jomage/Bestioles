@@ -1,5 +1,6 @@
 package fr.iocean.bestioles.exception.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * DTO qui sera renvoyé au client lors d'une exception
  */
+@Schema(allOf = ErrorDto.class)
 public class InvalidEntityErrorDto extends ErrorDto {
 
     private List<ObjectError> globalErrors;

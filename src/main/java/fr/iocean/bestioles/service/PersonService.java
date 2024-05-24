@@ -9,8 +9,6 @@ import fr.iocean.bestioles.exception.EntityToUpdateHasNoIdException;
 import fr.iocean.bestioles.repository.PersonRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +31,7 @@ public class PersonService {
     public List<PersonDto> findAll(String fragment) {
         List<Person> listToReturn;
         if (fragment != null && !fragment.isEmpty()) {
-            listToReturn = personRepository.findByLastnameContainingIgnoreCaseOrFirstnameContainingIgnoreCase(
+            listToReturn = personRepository.findByLastNameContainingIgnoreCaseOrFirstNameContainingIgnoreCase(
                     fragment, fragment);
         } else {
             listToReturn = personRepository.findAll();

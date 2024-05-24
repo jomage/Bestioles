@@ -66,8 +66,8 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
 
         for (int i = 0 ; i < count ; i++) {
             Person newPerson = new Person();
-            newPerson.setFirstname(faker.name().firstName());
-            newPerson.setLastname(faker.name().lastName());
+            newPerson.setFirstName(faker.name().firstName());
+            newPerson.setLastName(faker.name().lastName());
             newPerson.setAge(faker.number().numberBetween(0, 120));
             em.persist(newPerson);
             personList.add(newPerson);

@@ -24,20 +24,20 @@ INSERT INTO animal (color, name, sex, species_id) VALUES('Beige', 'Baveux', 'M',
 INSERT INTO animal (color, name, sex, species_id) VALUES('Gris et vert mais surtout vert', 'Philippe', 'M', 9); --11
 
 -- INSERT Persons
-INSERT INTO person (age, firstname, lastname) VALUES(55, 'Jean', 'Vintroi'); --1
-INSERT INTO person (age, firstname, lastname) VALUES(45, 'Sophie', 'Nero'); --2
-INSERT INTO person (age, firstname, lastname) VALUES(33, 'John', 'Mangolo'); --3
-INSERT INTO person (age, firstname, lastname) VALUES(26, 'Bill', 'Wagner'); --4
-INSERT INTO person (age, firstname, lastname) VALUES(3, 'Kilian', 'Gardavot'); --5
-INSERT INTO person (age, firstname, lastname) VALUES(13, 'Mattéo', 'Hardy'); --6
-INSERT INTO person (age, firstname, lastname) VALUES(4, 'Kelyan', 'Andriamisy'); --7
-INSERT INTO person (age, firstname, lastname) VALUES(75, 'Geneviève', 'Defontenay'); --8
-INSERT INTO person (age, firstname, lastname) VALUES(55, 'Lucie', 'Lacroix'); --9
-INSERT INTO person (age, firstname, lastname) VALUES(62, 'Alicia', 'Schmitt'); --10
-INSERT INTO person (age, firstname, lastname) VALUES(44, 'Océane', 'Fernandez'); --11
-INSERT INTO person (age, firstname, lastname) VALUES(71, 'Lilou', 'Rivière'); --12
-INSERT INTO person (age, firstname, lastname) VALUES(73, 'Alexis', 'Dubois');--13
-INSERT INTO person (age, firstname, lastname) VALUES(21, 'Lenae', 'Colin-Mayard'); --14
+INSERT INTO person (age, first_name, last_name) VALUES(55, 'Jean', 'Vintroi'); --1
+INSERT INTO person (age, first_name, last_name) VALUES(45, 'Sophie', 'Nero'); --2
+INSERT INTO person (age, first_name, last_name) VALUES(33, 'John', 'Mangolo'); --3
+INSERT INTO person (age, first_name, last_name) VALUES(26, 'Bill', 'Wagner'); --4
+INSERT INTO person (age, first_name, last_name) VALUES(3, 'Kilian', 'Gardavot'); --5
+INSERT INTO person (age, first_name, last_name) VALUES(13, 'Mattéo', 'Hardy'); --6
+INSERT INTO person (age, first_name, last_name) VALUES(4, 'Kelyan', 'Andriamisy'); --7
+INSERT INTO person (age, first_name, last_name) VALUES(75, 'Geneviève', 'Defontenay'); --8
+INSERT INTO person (age, first_name, last_name) VALUES(55, 'Lucie', 'Lacroix'); --9
+INSERT INTO person (age, first_name, last_name) VALUES(62, 'Alicia', 'Schmitt'); --10
+INSERT INTO person (age, first_name, last_name) VALUES(44, 'Océane', 'Fernandez'); --11
+INSERT INTO person (age, first_name, last_name) VALUES(71, 'Lilou', 'Rivière'); --12
+INSERT INTO person (age, first_name, last_name) VALUES(73, 'Alexis', 'Dubois');--13
+INSERT INTO person (age, first_name, last_name) VALUES(21, 'Lenae', 'Colin-Mayard'); --14
 
 -- INSERT Person_animals
 INSERT INTO person_animals (person_id, animals_id) VALUES(1, 1);

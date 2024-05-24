@@ -19,12 +19,12 @@ public class Person {
     @Column(length = 50)
     @NotBlank
     @Size(max = 50)
-    private String firstname;
+    private String firstName;
 
     @Column(length = 50)
     @NotBlank
     @Size(max = 50)
-    private String lastname;
+    private String lastName;
 
     @Min(0)
     @Max(120)
@@ -53,8 +53,8 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstName + '\'' +
+                ", lastname='" + lastName + '\'' +
                 ", age=" + age +
                 ", animals=" + animals +
                 '}';
@@ -70,20 +70,20 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
     }
 
     public Integer getAge() {
