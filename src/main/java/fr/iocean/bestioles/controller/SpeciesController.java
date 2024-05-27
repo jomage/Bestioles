@@ -2,6 +2,7 @@ package fr.iocean.bestioles.controller;
 
 import fr.iocean.bestioles.entity.Species;
 import fr.iocean.bestioles.service.SpeciesService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("api/species")
 //@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "Bearer Authentication")
 public class SpeciesController {
 
     @Autowired

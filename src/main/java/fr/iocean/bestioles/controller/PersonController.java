@@ -3,6 +3,7 @@ package fr.iocean.bestioles.controller;
 import fr.iocean.bestioles.dto.PersonDto;
 import fr.iocean.bestioles.entity.Person;
 import fr.iocean.bestioles.service.PersonService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/api/person")
 //@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "Bearer Authentication")
 public class PersonController {
 
     @Autowired
