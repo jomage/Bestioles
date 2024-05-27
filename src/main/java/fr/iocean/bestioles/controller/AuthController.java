@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
     @Autowired
     JWTTokenProvider jwtTokenProvider;

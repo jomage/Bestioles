@@ -83,6 +83,10 @@ Exemple :
 Authorization: "Bearer eyJhb....."
 ```
 
+## Utilisateur "courant"
+
+L'appel API `/api/user` renvoie les informations sur l'utilisateur courant (requiert d'être connecté / joindre un JWT).
+
 # API Rest "Bestioles"
 
 Le projet expose différents endpoints pour accéder aux données. Tous les endpoints commencent par `<nom-domaine>/api/`,

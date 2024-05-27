@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/animal")
+//@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
+@CrossOrigin(origins = "http://localhost:4200")
 public class AnimalController {
 
     @Autowired
