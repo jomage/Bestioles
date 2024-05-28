@@ -1,21 +1,22 @@
 package fr.iocean.bestioles.exception.advice;
 
+import fr.iocean.bestioles.exception.CannotDeleteEntityException;
 import fr.iocean.bestioles.exception.EntityToCreateHasAnIdException;
 import fr.iocean.bestioles.exception.EntityToUpdateHasNoIdException;
 import fr.iocean.bestioles.exception.dto.ErrorDto;
 import fr.iocean.bestioles.exception.dto.InvalidEntityErrorDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-
-import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
@@ -34,10 +35,23 @@ public class ExceptionHandlerControllerAdvice {
         );
     }
 
+    @ExceptionHandler({
+            HttpRequestMethodNotSupportedException.class
+    })
+    @ResponseStatus(code = HttpStatus.METHOD_NOT_ALLOWED)
+    public ErrorDto handleExceptionEndpointNotSupported(Exception exception, WebRequest request) {
+        exception.printStackTrace();
+        return new ErrorDto(
+                HttpStatus.METHOD_NOT_ALLOWED.value(),
+                exception.getMessage(),
+                request.getDescription(false)
+        );
+    }
 
     @ExceptionHandler({
             EntityToCreateHasAnIdException.class,
-            EntityToUpdateHasNoIdException.class
+            EntityToUpdateHasNoIdException.class,
+            CannotDeleteEntityException.class
     })
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ErrorDto handleExceptionBadId(Exception exception, WebRequest request) {
@@ -63,19 +77,19 @@ public class ExceptionHandlerControllerAdvice {
         );
     }
 
-    /* Commentée car prends le pas sur certaines autres (EntityNotFoundException perso)
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorDto handleException500(Exception exception, WebRequest request) {
+    @ExceptionHandler({
+            HttpMessageNotReadableException.class,
+            IllegalStateException.class
+    })
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public ErrorDto handleExceptionOther(Exception exception, WebRequest request) {
         exception.printStackTrace();
         return new ErrorDto(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                LocalDateTime.now(),
-                "ZUUUUUUUUUUT !",
+                HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage(),
                 request.getDescription(false)
         );
     }
-    */
 
     private String getMessagesFromBindingResult(BindingResult bindingResult) {
         StringBuilder sb = new StringBuilder();

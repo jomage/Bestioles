@@ -3,13 +3,7 @@ package fr.iocean.bestioles.controller;
 import fr.iocean.bestioles.dto.AnimalDto;
 import fr.iocean.bestioles.entity.Animal;
 import fr.iocean.bestioles.service.AnimalService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.servers.Server;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/animal")
 //@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT,RequestMethod.GET})
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200"})
 @SecurityRequirement(name = "Bearer Authentication")
 public class AnimalController {
 

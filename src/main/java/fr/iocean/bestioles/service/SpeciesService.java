@@ -1,8 +1,10 @@
 package fr.iocean.bestioles.service;
 
 import fr.iocean.bestioles.entity.Species;
+import fr.iocean.bestioles.exception.CannotDeleteEntityException;
 import fr.iocean.bestioles.exception.EntityToCreateHasAnIdException;
 import fr.iocean.bestioles.exception.EntityToUpdateHasNoIdException;
+import fr.iocean.bestioles.repository.AnimalRepository;
 import fr.iocean.bestioles.repository.SpeciesRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -16,6 +18,9 @@ public class SpeciesService {
 
     @Autowired
     SpeciesRepository speciesRepository;
+
+    @Autowired
+    AnimalRepository animalRepository;
 
     public Species findById(Integer id) {
         return speciesRepository.findById(id)
@@ -52,6 +57,10 @@ public class SpeciesService {
     public void deleteById(Integer id) {
         if (!speciesRepository.existsById(id)) {
             throw new EntityNotFoundException();
+        }
+
+        if (animalRepository.existsBySpeciesId(id)) {
+            throw new CannotDeleteEntityException("L'espèce est encore utilisée sur un Animal. Suppression impossible.");
         }
 
         speciesRepository.deleteById(id);
