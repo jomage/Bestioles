@@ -92,15 +92,15 @@ L'appel API `/api/user` renvoie les informations sur l'utilisateur courant (requ
 Le projet expose différents endpoints pour accéder aux données. Tous les endpoints commencent par `<nom-domaine>/api/`,
 ceux-ci requièrent d'être authentifié.  
 Pour chaque entité, il y a 
-- `GET localhost:8080/<nom-entité>` : liste d'entités avec possibilité de filtrer. Pour filtrer, accepte un paramètre
+- `GET localhost:8080/api/<nom-entité>` : liste d'entités avec possibilité de filtrer. Pour filtrer, accepte un paramètre
 `contains` avec comme valeur le fragment à trouver dans l'entité (cherche généralement sur les noms). Besoin du role
 ROLE_USER ou ROLE_ADMIN.
-- `GET localhost:8080/<nom-entité>/<id>` : ramène les infos complètes d'une entité, par son ID. Besoin du role ROLE_USER
+- `GET localhost:8080/api/<nom-entité>/<id>` : ramène les infos complètes d'une entité, par son ID. Besoin du role ROLE_USER
 ou ROLE_ADMIN.
-- `POST localhost:8080/<nom-entité>` : crée l'entité dans le body. Besoin du role ROLE_ADMIN.
-- `PUT localhost:8080/<nom-entité>/<id>` : modifie l'entité désignée par son ID par la version donnée dans le body. Besoin
+- `POST localhost:8080/api/<nom-entité>` : crée l'entité dans le body. Besoin du role ROLE_ADMIN.
+- `PUT localhost:8080/api/<nom-entité>/<id>` : modifie l'entité désignée par son ID par la version donnée dans le body. Besoin
 du role ROLE_ADMIN.
-- `DELETE localhost:8080/<nom-entité>/<id>` : tente de supprimer l'entité désignée par l'ID fournie. Besoin du role
+- `DELETE localhost:8080/api/<nom-entité>/<id>` : tente de supprimer l'entité désignée par l'ID fournie. Besoin du role
 ROLE_ADMIN.
 
 # Swagger & OpenAPI
