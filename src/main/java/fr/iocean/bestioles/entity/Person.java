@@ -39,16 +39,6 @@ public class Person {
     @JsonIgnoreProperties("persons")
     Set<Animal> animals;
 
-    // Utility
-
-//    public void addAnimal(Animal animal) {
-//        this.animals.add(animal);
-//    }
-//
-//    public void removeAnimal(Animal animal) {
-//        this.animals.remove(animal);
-//    }
-
     @Override
     public String toString() {
         return "Person{" +

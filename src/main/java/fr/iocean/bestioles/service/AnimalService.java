@@ -6,6 +6,7 @@ import fr.iocean.bestioles.entity.Animal;
 import fr.iocean.bestioles.exception.EntityToCreateHasAnIdException;
 import fr.iocean.bestioles.exception.EntityToUpdateHasNoIdException;
 import fr.iocean.bestioles.repository.AnimalRepository;
+import fr.iocean.bestioles.repository.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +53,12 @@ public class AnimalService {
         return animalRepository.save(animalToUpdate);
     }
 
-    public Animal create(@Valid Animal animalToCreaet) {
-        if (animalToCreaet.getId() != null) {
+    public Animal create(@Valid Animal animalToCreate) {
+        if (animalToCreate.getId() != null) {
             throw new EntityToCreateHasAnIdException();
         }
 
-        return animalRepository.save(animalToCreaet);
+        return animalRepository.save(animalToCreate);
     }
 
     public void deleteById(Integer id) {

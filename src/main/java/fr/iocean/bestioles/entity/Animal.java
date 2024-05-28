@@ -37,6 +37,14 @@ public class Animal {
     @JsonIgnoreProperties("animals")
     Set<Person> persons;
 
+    // Pre-remove
+    @PreRemove
+    private void removePersonAssociations() {
+        for (Person person: this.persons) {
+            person.getAnimals().remove(this);
+        }
+    }
+
     // Getters / setters
 
     public Set<Person> getPersons() {
