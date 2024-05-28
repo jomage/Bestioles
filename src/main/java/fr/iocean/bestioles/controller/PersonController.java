@@ -26,18 +26,6 @@ public class PersonController {
         return personService.findById(id);
     }
 
-    /**
-     * Méthode bonus "search" avec critères optionnels et utilisation de la Criterias API de JPA
-     */
-    @GetMapping("search")
-    public List<Person> search(
-            @RequestParam(value = "firstname", required = false) String firstname,
-            @RequestParam(value = "lastname", required = false) String lastname,
-            @RequestParam(value = "age", required = false) Integer age
-    ) {
-        return personService.search(firstname, lastname, age);
-    }
-
     @GetMapping
     public List<PersonDto> findAll(@RequestParam(value = "contains", required = false) String fragment) {
         return personService.findAll(fragment);

@@ -38,11 +38,12 @@ public class JWTTokenProvider {
     @Value("${jwt.base64-secret}")
     private String secretKey;
 
+    @Value("${jwt.exp}")
+    private long validityInMilliseconds;
+
     private final JwtEncoder jwtEncoder;
 
     private JwtParser jwtParser;
-
-    private final long validityInMilliseconds = 3600000; // 1h
 
     public JWTTokenProvider(final JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
