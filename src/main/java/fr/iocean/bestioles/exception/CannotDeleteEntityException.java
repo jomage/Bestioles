@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class CannotDeleteEntityException extends RuntimeException {
     public CannotDeleteEntityException() {
-        super("L'entité avec cette ID n'a pas été trouvée");
+        super("Suppression de l'entité impossible");
     }
     public CannotDeleteEntityException(String message) {
         super(message);
