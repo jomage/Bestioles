@@ -30,7 +30,7 @@ public class Person {
     @Max(120)
     private Integer age;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})//(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.MERGE })//(fetch = FetchType.EAGER)
     @JoinTable(
             name = "person_animals",
             joinColumns = @JoinColumn(name = "person_id"),
